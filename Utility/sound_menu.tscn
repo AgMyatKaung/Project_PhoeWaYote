@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtnhweu10qkic"]
+
+[ext_resource type="Script" path="res://Utility/SoundSetting.gd" id="1_5or22"]
+[ext_resource type="Texture2D" uid="uid://b6k8n4kyh23ho" path="res://Textures/GUI/pIaysong.png" id="1_l42bw"]
+[ext_resource type="Texture2D" uid="uid://ds4dsvu0nda67" path="res://Textures/GUI/mutesong.png" id="2_fkhys"]
+[ext_resource type="AudioStream" uid="uid://mnixawxbbkjj" path="res://Audio/Music/battleThemeA.mp3" id="3_fjnl4"]
+
+[node name="soundMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -21.0
+offset_right = 418.0
+offset_bottom = 399.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+toggle_mode = true
+button_pressed = true
+action_mode = 0
+texture_normal = ExtResource("2_fkhys")
+texture_pressed = ExtResource("1_l42bw")
+stretch_mode = 0
+script = ExtResource("1_5or22")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fjnl4")
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]

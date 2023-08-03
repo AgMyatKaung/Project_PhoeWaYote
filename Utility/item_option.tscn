@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1n2gocmtoqcb"]
+
+[ext_resource type="Theme" uid="uid://snd12apoch4y" path="res://Font/new_theme.tres" id="1_848yr"]
+[ext_resource type="Script" path="res://Utility/item_option.gd" id="1_fa34s"]
+[ext_resource type="Texture2D" uid="uid://c5lhr4tgssgso" path="res://Textures/Items/Weapons/sword.png" id="1_pv4nd"]
+[ext_resource type="FontFile" uid="uid://dry0ap18s2gh8" path="res://Font/Bitty.ttf" id="4_0j2m2"]
+
+[node name="ItemOption" type="ColorRect"]
+custom_minimum_size = Vector2(180, 50)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -435.0
+offset_bottom = -259.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_848yr")
+color = Color(0.592157, 0.592157, 0.592157, 0.298039)
+script = ExtResource("1_fa34s")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 1)
+
+[node name="ItemIcon" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_pv4nd")
+
+[node name="lbl_name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 3.0
+offset_right = 116.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("4_0j2m2")
+text = "Name"
+horizontal_alignment = 1
+
+[node name="lbl_description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 23.0
+offset_right = 205.0
+offset_bottom = 41.0
+theme_override_constants/line_spacing = 1
+theme_override_fonts/font = ExtResource("4_0j2m2")
+theme_override_font_sizes/font_size = 15
+text = "Description of Item"
+autowrap_mode = 3
+
+[node name="lbl_level" type="Label" parent="."]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 3.0
+offset_right = 167.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("4_0j2m2")
+theme_override_font_sizes/font_size = 16
+text = "level: 1"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

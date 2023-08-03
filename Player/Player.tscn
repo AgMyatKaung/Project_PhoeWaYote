@@ -1,33 +1,419 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=26 format=3 uid="uid://18hqgfsg3qdu"]
 
-[ext_resource path="res://Arts/Player/pixil-frame-0.png" type="Texture" id=1]
-[ext_resource path="res://Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://Arts/v1.1 dungeon crawler 16X16 pixel pack/heroes/knight/weapon_sword_1.png" type="Texture" id=3]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_vo58n"]
+[ext_resource type="Texture2D" uid="uid://bqsopw2n27j1n" path="res://Textures/Player/knight/knight_idle_spritesheet.png" id="2_lai25"]
+[ext_resource type="PackedScene" uid="uid://b6rx8kpmk7ec0" path="res://Utility/hitbox.tscn" id="3_o2vvu"]
+[ext_resource type="Texture2D" uid="uid://bohhdt5jif68a" path="res://Textures/Player/knight/knight_run_spritesheet.png" id="3_ry42q"]
+[ext_resource type="Texture2D" uid="uid://c0mdkb2n3jbij" path="res://Textures/GUI/hpbar.png" id="5_2b5ho"]
+[ext_resource type="AudioStream" uid="uid://bs6phjtcylu4m" path="res://Audio/SoundEffect/levelup.ogg" id="7_10ugn"]
+[ext_resource type="Texture2D" uid="uid://qts64yrynu27" path="res://Textures/GUI/BarV1_Bar.png" id="7_y2cn5"]
+[ext_resource type="Texture2D" uid="uid://bvdg5dl8cj68h" path="res://Textures/GUI/BarV1_ProgressBar.png" id="8_2xxm5"]
+[ext_resource type="FontFile" uid="uid://dry0ap18s2gh8" path="res://Font/Bitty.ttf" id="10_cd7bg"]
+[ext_resource type="AudioStream" uid="uid://b53fkqsrygq2p" path="res://Audio/SoundEffect/Victory.wav" id="10_pf2cv"]
+[ext_resource type="Texture2D" uid="uid://dsxu072rkw4o1" path="res://Textures/GUI/Untitled design.png" id="10_x1r8b"]
+[ext_resource type="AudioStream" uid="uid://de5cxv5cbes1g" path="res://Audio/SoundEffect/Lose.ogg" id="11_kkxt4"]
+[ext_resource type="PackedScene" uid="uid://dxa4hqlrime4h" path="res://Utility/basic_button.tscn" id="12_og56r"]
+[ext_resource type="PackedScene" uid="uid://cuykbon8blek4" path="res://Utility/Score_system.tscn" id="14_4rqpe"]
+[ext_resource type="Texture2D" uid="uid://jino72q3drin" path="res://Textures/GUI/Large Buttons/Menu Button.png" id="14_yfmxh"]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="Animation" id="Animation_4lprc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_lai25")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yqwte"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_lai25")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_57v4r"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ry42q")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_phye3"]
+_data = {
+"RESET": SubResource("Animation_4lprc"),
+"idle": SubResource("Animation_yqwte"),
+"run": SubResource("Animation_57v4r")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iu0qq"]
 radius = 5.0
-height = 14.0
+height = 20.0
 
-[node name="Player" type="KinematicBody2D"]
-position = Vector2( 69, 47 )
-script = ExtResource( 2 )
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u56d7"]
+size = Vector2(16, 25)
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+[sub_resource type="CircleShape2D" id="CircleShape2D_dju3k"]
+radius = 374.681
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -2, 2 )
-shape = SubResource( 1 )
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1hjo"]
+radius = 50.0
 
-[node name="weapon2" type="Sprite" parent="."]
-position = Vector2( 7, 6 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8ks7"]
+radius = 10.0499
 
-[node name="Position2D" type="Position2D" parent="weapon2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_di1so"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 33
+motion_mode = 1
+script = ExtResource("1_vo58n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_lai25")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_phye3")
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.5, 0.5 )
-smoothing_enabled = true
-smoothing_speed = 10.0
+editor_draw_limits = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 33
+visibility_layer = 33
+position = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_iu0qq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Hitbox" parent="." instance=ExtResource("3_o2vvu")]
+visible = false
+collision_layer = 2
+collision_mask = 2
+HitBoxType = 2
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(1, 1.5)
+shape = SubResource("RectangleShape2D_u56d7")
+
+[node name="Attack" type="Node2D" parent="."]
+
+[node name="IceSpearTimer" type="Timer" parent="Attack"]
+wait_time = 1.5
+
+[node name="IceSpearAttackTimer" type="Timer" parent="Attack/IceSpearTimer"]
+wait_time = 0.075
+
+[node name="TornadoTimer" type="Timer" parent="Attack"]
+wait_time = 3.0
+
+[node name="TornadoAttackTimer" type="Timer" parent="Attack/TornadoTimer"]
+wait_time = 0.2
+
+[node name="Javelins" type="Node2D" parent="Attack"]
+
+[node name="EnemyDetectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
+shape = SubResource("CircleShape2D_dju3k")
+
+[node name="GrabArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_r1hjo")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_m8ks7")
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="GUI" type="Control" parent="GUILayer" groups=["Player"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="hpbar" type="Sprite2D" parent="GUILayer/GUI"]
+position = Vector2(76, 14)
+scale = Vector2(0.75873, 0.690999)
+texture = ExtResource("5_2b5ho")
+
+[node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 10.0
+offset_right = 303.0
+offset_bottom = 31.0
+scale = Vector2(0.4, 0.4)
+value = 100.0
+texture_under = ExtResource("7_y2cn5")
+texture_progress = ExtResource("8_2xxm5")
+
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+modulate = Color(0.701961, 0.419608, 1, 1)
+self_modulate = Color(0.745098, 0.607843, 0.905882, 1)
+layout_mode = 0
+offset_left = 29.0
+offset_top = 22.0
+offset_right = 301.0
+offset_bottom = 43.0
+scale = Vector2(0.3, 0.3)
+texture_under = ExtResource("7_y2cn5")
+texture_progress = ExtResource("8_2xxm5")
+
+[node name="lbl_level" type="Label" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 13.0
+offset_right = 148.0
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource("10_cd7bg")
+theme_override_font_sizes/font_size = 18
+text = "Level: 1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
+process_mode = 2
+layout_mode = 0
+offset_left = 807.0
+offset_top = 50.0
+offset_right = 1015.0
+offset_bottom = 512.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_di1so")
+
+[node name="bg" type="Sprite2D" parent="GUILayer/GUI/LevelUp"]
+modulate = Color(0.0196078, 0.0705882, 0.105882, 1)
+position = Vector2(104, 146.25)
+scale = Vector2(1.20833, 1.20625)
+texture = ExtResource("10_x1r8b")
+
+[node name="lbl_LevelUP" type="Label" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 204.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("10_cd7bg")
+theme_override_font_sizes/font_size = 24
+text = "Level Up!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeOptions" type="VBoxContainer" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 62.0
+offset_right = 211.0
+offset_bottom = 297.0
+
+[node name="snd_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp"]
+stream = ExtResource("7_10ugn")
+volume_db = -10.0
+
+[node name="DeathPanel" type="Panel" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 0
+offset_left = 220.0
+offset_top = -300.0
+offset_right = 420.0
+offset_bottom = -50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_di1so")
+
+[node name="bg" type="Sprite2D" parent="GUILayer/GUI/DeathPanel"]
+modulate = Color(0.0156863, 0.113725, 0.0901961, 1)
+position = Vector2(98, 122)
+texture = ExtResource("10_x1r8b")
+
+[node name="lbl_Result" type="Label" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -3.0
+offset_right = 199.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("10_cd7bg")
+theme_override_font_sizes/font_size = 30
+text = "Result"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+stream = ExtResource("10_pf2cv")
+volume_db = -10.0
+
+[node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel"]
+unique_name_in_owner = true
+stream = ExtResource("11_kkxt4")
+volume_db = -10.0
+
+[node name="btn_menu" parent="GUILayer/GUI/DeathPanel" instance=ExtResource("12_og56r")]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 154.0
+offset_right = 137.0
+offset_bottom = 184.0
+theme_override_fonts/font = ExtResource("10_cd7bg")
+theme_override_font_sizes/font_size = 40
+text = ""
+icon = ExtResource("14_yfmxh")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Score_system" parent="GUILayer/GUI/DeathPanel" instance=ExtResource("14_4rqpe")]
+position = Vector2(93, 106)
+
+[node name="scorePoint" parent="GUILayer/GUI/DeathPanel/Score_system" index="0"]
+offset_left = 55.0
+offset_top = 1.0
+offset_right = 95.0
+offset_bottom = 33.0
+
+[node name="Score" parent="GUILayer/GUI/DeathPanel/Score_system" index="1"]
+offset_left = -71.0
+offset_top = 1.0
+offset_right = -13.0
+offset_bottom = 33.0
+
+[node name="Hi_score" parent="GUILayer/GUI/DeathPanel/Score_system" index="2"]
+offset_left = 55.0
+offset_top = -36.0
+offset_right = 95.0
+offset_bottom = -4.0
+
+[node name="Label" parent="GUILayer/GUI/DeathPanel/Score_system" index="3"]
+offset_left = -71.0
+offset_top = -37.0
+offset_right = 35.0
+offset_bottom = -5.0
+
+[node name="lbl_timer" type="Label" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 279.0
+offset_top = -4.0
+offset_right = 359.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("10_cd7bg")
+theme_override_font_sizes/font_size = 35
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollectedWeapons" type="GridContainer" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 32.0
+offset_right = 230.0
+offset_bottom = 48.0
+columns = 10
+
+[node name="CollectedUpgrades" type="GridContainer" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 50.0
+offset_right = 230.0
+offset_bottom = 66.0
+columns = 10
+
+[node name="Score_system" parent="." instance=ExtResource("14_4rqpe")]
+position = Vector2(146, -181)
+
+[connection signal="hurt" from="Hitbox" to="." method="_on_hitbox_hurt"]
+[connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
+[connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/TornadoTimer" to="." method="_on_tornado_timer_timeout"]
+[connection signal="timeout" from="Attack/TornadoTimer/TornadoAttackTimer" to="." method="_on_tornado_attack_timer_timeout"]
+[connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
+[connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
+[connection signal="click_end" from="GUILayer/GUI/DeathPanel/btn_menu" to="." method="_on_button_click_end"]
+
+[editable path="Hitbox"]
+[editable path="GUILayer/GUI/DeathPanel/Score_system"]

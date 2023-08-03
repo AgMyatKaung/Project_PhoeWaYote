@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://fn1bd4kp5gog"]
+
+[ext_resource type="Script" path="res://Utility/pause_menu.gd" id="1_nukpu"]
+[ext_resource type="FontFile" uid="uid://dry0ap18s2gh8" path="res://Font/Bitty.ttf" id="2_crhvn"]
+[ext_resource type="PackedScene" uid="uid://dtnhweu10qkic" path="res://Utility/sound_menu.tscn" id="6_5jnfo"]
+
+[sub_resource type="Theme" id="Theme_q4ma0"]
+default_font = ExtResource("2_crhvn")
+default_font_size = 40
+
+[node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+layer = 12
+script = ExtResource("1_nukpu")
+
+[node name="pause_menu" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="pause_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="pause_menu/CenterContainer"]
+custom_minimum_size = Vector2(400, 180)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="pause_menu/CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_q4ma0")
+
+[node name="Label" type="Label" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="resume" type="Button" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+text = "RESUME"
+expand_icon = true
+
+[node name="menu" type="Button" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+text = "MENU"
+icon_alignment = 1
+expand_icon = true
+
+[node name="HSeparator2" type="HSeparator" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="soundMenu" parent="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("6_5jnfo")]
+layout_mode = 2
+
+[connection signal="pressed" from="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="pause_menu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/menu" to="." method="_on_menu_pressed"]

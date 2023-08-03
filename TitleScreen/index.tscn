@@ -1,0 +1,187 @@
+[gd_scene load_steps=14 format=3 uid="uid://bhepgdgvqijau"]
+
+[ext_resource type="Script" path="res://TitleScreen/index.gd" id="1_7u0vo"]
+[ext_resource type="Texture2D" uid="uid://b8gf6y1udps6u" path="res://Textures/GUI/Littel knight.jpg" id="1_khcjk"]
+[ext_resource type="AudioStream" uid="uid://ca16vj4x2cpvi" path="res://Audio/GUI/click.wav" id="3_s6ogp"]
+[ext_resource type="FontFile" uid="uid://dry0ap18s2gh8" path="res://Font/Bitty.ttf" id="3_v7rb5"]
+[ext_resource type="Texture2D" uid="uid://bqsopw2n27j1n" path="res://Textures/Player/knight/knight_idle_spritesheet.png" id="5_wvyvl"]
+[ext_resource type="Texture2D" uid="uid://b4qbcp3q6l0mf" path="res://Textures/Enemy/kobold_demonologist.png" id="6_ml7w0"]
+[ext_resource type="Texture2D" uid="uid://celkdrn2gxi6j" path="res://Textures/Enemy/cyclops.png" id="7_tsnux"]
+[ext_resource type="Texture2D" uid="uid://cpnvikxspt8ui" path="res://Textures/Enemy/orc_knight_new.png" id="8_8cj5j"]
+[ext_resource type="Texture2D" uid="uid://dpdrjkjxo5kgo" path="res://Textures/Enemy/orc_new.png" id="9_f5lxm"]
+
+[sub_resource type="Animation" id="Animation_wjskg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_wvyvl")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cyclops:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_tsnux")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cyclops:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yw30l"]
+resource_name = "c1"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cyclops:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_tsnux")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cyclops:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_o5ts3"]
+resource_name = "new_animation"
+length = 0.59
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_wvyvl")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q4dtu"]
+_data = {
+"RESET": SubResource("Animation_wjskg"),
+"c1": SubResource("Animation_yw30l"),
+"new_animation": SubResource("Animation_o5ts3")
+}
+
+[node name="index" type="Node2D"]
+script = ExtResource("1_7u0vo")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 639.0
+offset_bottom = 362.0
+texture = ExtResource("1_khcjk")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 184.0
+offset_top = 312.0
+offset_right = 469.0
+offset_bottom = 347.0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("3_v7rb5")
+theme_override_font_sizes/font_size = 40
+text = "Click Anywher to continue"
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 648.0
+offset_bottom = 360.0
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_s6ogp")
+autoplay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(96, 304)
+scale = Vector2(2, 2)
+texture = ExtResource("5_wvyvl")
+hframes = 6
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(504, 304)
+texture = ExtResource("6_ml7w0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "new_animation"
+libraries = {
+"": SubResource("AnimationLibrary_q4dtu")
+}
+
+[node name="OrcKnightNew" type="Sprite2D" parent="."]
+position = Vector2(544, 304)
+texture = ExtResource("8_8cj5j")
+
+[node name="OrcNew" type="Sprite2D" parent="."]
+position = Vector2(584, 304)
+texture = ExtResource("9_f5lxm")
+
+[node name="Cyclops" type="Sprite2D" parent="."]
+position = Vector2(448, 304)
+texture = ExtResource("7_tsnux")
+flip_h = true
+hframes = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

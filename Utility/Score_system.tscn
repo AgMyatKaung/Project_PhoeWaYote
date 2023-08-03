@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuykbon8blek4"]
+
+[ext_resource type="Script" path="res://Utility/score_label.gd" id="1_ic7c6"]
+[ext_resource type="FontFile" uid="uid://dry0ap18s2gh8" path="res://Font/Bitty.ttf" id="1_ys84t"]
+[ext_resource type="Script" path="res://Utility/hightscore.gd" id="3_hvdsm"]
+
+[node name="Score_system" type="Node2D"]
+
+[node name="scorePoint" type="Label" parent="."]
+offset_left = 115.0
+offset_top = 24.0
+offset_right = 155.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("1_ys84t")
+theme_override_font_sizes/font_size = 30
+text = "0"
+script = ExtResource("1_ic7c6")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 1.0
+offset_top = 21.0
+offset_right = 59.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("1_ys84t")
+theme_override_font_sizes/font_size = 30
+text = "Scores 
+"
+
+[node name="Hi_score" type="Label" parent="."]
+offset_left = 114.0
+offset_right = 219.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("1_ys84t")
+theme_override_font_sizes/font_size = 30
+text = "0"
+script = ExtResource("3_hvdsm")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 1.0
+offset_right = 107.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("1_ys84t")
+theme_override_font_sizes/font_size = 30
+text = "High Score"
